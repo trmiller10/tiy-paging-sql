@@ -1,5 +1,7 @@
 /**
  * Created by Taylor on 5/25/16.
+ *
+ * This class creates Person objects that contain info properties
  */
 public class Person {
 
