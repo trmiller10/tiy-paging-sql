@@ -5,7 +5,7 @@
  */
 public class Person {
 
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -14,7 +14,7 @@ public class Person {
 
     public Person(){}
 
-    public Person(String id, String firstName, String lastName, String email, String country, String ipAddress) {
+    public Person(int id, String firstName, String lastName, String email, String country, String ipAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,8 +23,8 @@ public class Person {
         this.ipAddress = ipAddress;
     }
 
-    public String getId() {return id;}
-    public void setId(String id) {
+    public int getId() {return id;}
+    public void setId(int id) {
         this.id = id;
     }
 

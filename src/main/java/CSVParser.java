@@ -48,7 +48,7 @@ public class CSVParser {
             Person person = new Person();
 
             // set the person's ID using the split data from above
-            person.setId(splitLine[0]);
+            person.setId(Integer.valueOf(splitLine[0]));
 
             // set the person's first name using the split data from above
             person.setFirstName(splitLine[1]);
