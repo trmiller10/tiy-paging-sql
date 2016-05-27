@@ -33,23 +33,28 @@ public class PagingServiceTests {
         pagingService.createTables(connection);
     }
 
+    /**
+     *
+     * Given: H2 server, database, and connection
+     * When: new Person object created with all properties
+     * Then: Person object successfully inserted into database and successfully selected from database
+     * @throws SQLException
+     * @throws InterruptedException
+     */
     @Test
     public void testPersonMethods() throws SQLException, InterruptedException {
-        PagingService service = new PagingService(connection);
 
+        //Arrange
+        PagingService service = new PagingService(connection);
         Person testPerson = new Person(1, "TEST", "test", "testEmail", "testCountry", "testIpAddress");
 
+        //Act
         service.insertPerson(connection, testPerson);
-
         Person selectPerson = service.selectPerson(connection, 1);
+
         connection.close();
 
+        //Assert
         assertThat(selectPerson.getId(), is(1));
-
-
     }
-
-
-
-
 }
