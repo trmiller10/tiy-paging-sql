@@ -1,10 +1,22 @@
 <html>
 <body>
 
+<p>
+    {{#people}}
+        <a href="/person?id={{id}}">{{firstName}} {{lastName}}</a><br />
+    {{/people}}
+</p>
 
-{{#string}}
-    U da real mvp
-{{/string}}
+<p>
+    {{#backOffset}}
+        <a href="/?offset={{backOffset}}">back</a>
+    {{/backOffset}}
+
+    {{#nextOffset}}
+        <a href="/?offset={{nextOffset}}">next</a>
+    {{/nextOffset}}
+</p>
+
 
 
 </body>

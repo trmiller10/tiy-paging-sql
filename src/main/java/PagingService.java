@@ -1,5 +1,7 @@
 import javax.management.relation.RelationSupport;
+import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Taylor on 5/25/16.
@@ -50,6 +52,58 @@ public class PagingService {
             return person;
         }
         return null;
+    }
+
+    public void populateDatabase(Connection connection) throws FileNotFoundException, SQLException{
+
+        CSVParser parser = new CSVParser();
+        ArrayList<Person> parsedArrayList = parser.parse("people.csv");
+
+        for (Person parsedPerson : parsedArrayList) {
+            insertPerson(connection, parsedPerson);
+        }
+    }
+
+    public ArrayList<Person> selectPeople(Connection connection) throws SQLException {
+        ArrayList<Person> selectPeopleArrayList = new ArrayList<>();
+
+        PreparedStatement prepStat = connection.prepareStatement("SELECT * FROM people ORDER BY ID ASC");
+
+        ResultSet resultSet = prepStat.executeQuery();
+
+        while (resultSet.next()) {
+            Person readPerson = new Person(
+                    resultSet.getInt("ID"),
+                    resultSet.getString("FIRSTNAME"),
+                    resultSet.getString("LASTNAME"),
+                    resultSet.getString("EMAIL"),
+                    resultSet.getString("COUNTRY"),
+                    resultSet.getString("IPADDRESS")
+            );
+            selectPeopleArrayList.add(readPerson);
+        }
+        return selectPeopleArrayList;
+    }
+    public ArrayList<Person> selectPeople(Connection connection, int offset) throws SQLException {
+        ArrayList<Person> selectPeopleArrayList = new ArrayList<>();
+
+        PreparedStatement prepStat = connection.prepareStatement("SELECT * FROM people ORDER BY ID ASC LIMIT 20 OFFSET ?");
+        prepStat.setInt(1, offset);
+
+        ResultSet resultSet = prepStat.executeQuery();
+
+        while (resultSet.next()) {
+            Person readPerson = new Person(
+                    resultSet.getInt("ID"),
+                    resultSet.getString("FIRSTNAME"),
+                    resultSet.getString("LASTNAME"),
+                    resultSet.getString("EMAIL"),
+                    resultSet.getString("COUNTRY"),
+                    resultSet.getString("IPADDRESS")
+            );
+            selectPeopleArrayList.add(readPerson);
+        }
+        return selectPeopleArrayList;
     }
 }
 

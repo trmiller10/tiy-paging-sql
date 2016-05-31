@@ -37,7 +37,7 @@ public class CSVParser {
             // Read the next line from the scanner and store it in a variable
             String textLine = scanFile.nextLine();
 
-            System.out.println(textLine);
+            //System.out.println(textLine);
 
             // Split the variable holding this line of data. Use comma as the delimiter.
             // note: there is one line of csv file that has a comma in the country name.

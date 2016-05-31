@@ -1,7 +1,9 @@
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.h2.tools.Server;
 import org.junit.After;
@@ -57,4 +59,34 @@ public class PagingServiceTests {
         //Assert
         assertThat(selectPerson.getId(), is(1));
     }
+
+    /**
+     * Populate database
+     */
+    @Test
+    public void testPopulateDatabaseMethod() throws FileNotFoundException, SQLException {
+
+        PagingService service = new PagingService(connection);
+
+        service.populateDatabase(connection);
+
+        Person person = service.selectPerson(connection, 1);
+
+        connection.close();
+
+        //assertThat(person, is("Martha"));
+    }
+/*
+    @Test
+    public void testSelectPeopleMethod() throws FileNotFoundException, SQLException {
+        PagingService service = new PagingService(connection);
+
+        service.populateDatabase(connection);
+
+        ArrayList<Person> testPeopleList = service.selectPeople(connection);
+
+        connection.close();
+
+    }
+*/
 }
